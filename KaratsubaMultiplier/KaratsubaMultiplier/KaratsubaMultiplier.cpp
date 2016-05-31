@@ -131,6 +131,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	switch (message)
 	{
+
+
+	case WM_LBUTTONDOWN:
+		// BEGIN NEW CODE
+	{
+						   wchar_t szFileName[MAX_PATH];
+						   HINSTANCE hInstance = GetModuleHandle(NULL);
+
+						   GetModuleFileName(hInstance, szFileName, MAX_PATH);
+						   MessageBox(hWnd, szFileName, L"This program is:", MB_OK | MB_ICONINFORMATION);
+	}
+		break;
 	case WM_COMMAND:
 		wmId    = LOWORD(wParam);
 		wmEvent = HIWORD(wParam);

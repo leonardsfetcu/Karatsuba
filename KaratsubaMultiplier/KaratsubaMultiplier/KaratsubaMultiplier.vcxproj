@@ -93,6 +93,8 @@
     <ResourceCompile Include="KaratsubaMultiplier.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="ico00001.ico" />
+    <Image Include="icon1.ico" />
     <Image Include="KaratsubaMultiplier.ico" />
     <Image Include="small.ico" />
   </ItemGroup>

@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -38,10 +35,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KaratsubaMultiplier.cpp">
+    <ClCompile Include="C_Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C_Source.cpp">
+    <ClCompile Include="KaratsubaMultiplier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -51,13 +48,10 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="KaratsubaMultiplier.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="..\..\..\..\..\Desktop\calc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="calc.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -14,9 +14,8 @@ HINSTANCE hInst;								// current instance
 TCHAR szTitle[MAX_LOADSTRING];					// The title bar text
 TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
 HWND g_hToolbar = NULL;
-HWND text_box, Button1, Button2, Button3, Button4, 
-Button5, ButtonDif,ButtonFact
-, Button6, Button7, Button8, Button9, Button0,
+HWND text_box, ButtonDif,ButtonFact,
+window1,window2,
 ButtonC, ButtonD, ButtonSum, ButtonM;
 
 HWND nr1, nr2, operationWindow,operationText;
@@ -122,14 +121,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // Store instance handle in our global variable
 
 
-   hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, 800, 300, NULL, NULL, hInstance, NULL);
-
+   hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU,
+      CW_USEDEFAULT, 0, 760, 300, NULL, NULL, hInstance, NULL);
+ //  SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE)&~WS_SIZEBOX);
    text_box = CreateWindow(
 	   L"EDIT",  // Predefined class; Unicode assumed 
 	   L"",      // Button text 
 	   WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT | ES_READONLY | ES_NUMBER,  // Styles 
-	   50,         // x position 
+	   80,         // x position 
 	   100,         // y position 
 	   500,        // Button width
 	   70,        // Button height
@@ -142,7 +141,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	   L"EDIT",  // Predefined class; Unicode assumed 
 	   L"",      // Button text 
 	   WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT | ES_NUMBER,  // Styles 
-	   50,         // x position 
+	   80,         // x position 
 	   20,         // y position 
 	   500,        // Button width
 	   20,        // Button height
@@ -155,7 +154,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	   L"EDIT",  // Predefined class; Unicode assumed 
 	   L"",      // Button text 
 	   WS_CHILD | WS_VISIBLE | WS_BORDER | ES_CENTER | ES_READONLY ,  // Styles 
-	   520,         // x position 
+	   550,         // x position 
 	   45,         // y position 
 	   30,        // Button width
 	   20,        // Button height
@@ -163,13 +162,39 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	   NULL,       // No menu.
 	   (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE),
 	   NULL);      // Pointer not needed.
-  
+
+   window1 = CreateWindow(
+	   L"EDIT",  // Predefined class; Unicode assumed 
+	   L"Numarul 1:",      // Button text 
+	   WS_CHILD | WS_VISIBLE | ES_CENTER | ES_READONLY,  // Styles 
+	   5,         // x position 
+	   20,         // y position 
+	   70,        // Button width
+	   20,        // Button height
+	   hWnd,     // Parent window
+	   NULL,       // No menu.
+	   (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE),
+	   NULL);      // Pointer not needed.
+
+   window2 = CreateWindow(
+	   L"EDIT",  // Predefined class; Unicode assumed 
+	   L"Numarul 2:",      // Button text 
+	   WS_CHILD | WS_VISIBLE | ES_CENTER | ES_READONLY,  // Styles 
+	   5,         // x position 
+	   70,         // y position 
+	   70,        // Button width
+	   20,        // Button height
+	   hWnd,     // Parent window
+	   NULL,       // No menu.
+	   (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE),
+	   NULL);      // Pointer not needed.
+
 
    operationText = CreateWindow(
 	   L"EDIT",  // Predefined class; Unicode assumed 
 	   L"Operator",      // Button text 
 	   WS_CHILD | WS_VISIBLE | ES_CENTER| ES_NUMBER|ES_READONLY,  // Styles 
-	   450,         // x position 
+	   480,         // x position 
 	   45,         // y position 
 	   60,        // Button width
 	   20,        // Button height
@@ -183,7 +208,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	   L"EDIT",  // Predefined class; Unicode assumed 
 	   L"",      // Button text 
 	   WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT | ES_NUMBER,  // Styles 
-	   50,         // x position 
+	   80,         // x position 
 	   70,         // y position 
 	   500,        // Button width
 	   20,        // Button height
@@ -457,28 +482,32 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				SetWindowText(operationWindow, L"!");
 				GetWindowText(nr1, buff, 200);
 				
-
-				buff1_int[0] = wcslen(buff);
-
-				for (int i = 0; i < wcslen(buff); i++)
+				if (wcslen(buff))
 				{
-					buff1_int[i + 1] = buff[i] - '0';
+					buff1_int[0] = wcslen(buff);
+
+					for (int i = 0; i < wcslen(buff); i++)
+					{
+						buff1_int[i + 1] = buff[i] - '0';
+					}
+
+					value = factorial(buff1_int);
+
+					if (value != NULL)
+					{
+						value = Cleaner(value);
+
+						for (i = 1; i <= value[0]; i++)
+							buff[i - 1] = value[i] + '0';
+
+
+						buff[i - 1] = '\0';
+						SetWindowText(text_box, buff);
+					}
 				}
-
-				value = factorial(buff1_int);
-
-				if (value != NULL)
-				{
-					value = Cleaner(value);
-
-					for (i = 1; i <= value[0]; i++)
-						buff[i - 1] = value[i] + '0';
-
-
-					buff[i - 1] = '\0';
-					SetWindowText(text_box, buff);
+				else {
+					SetWindowText(text_box, L"Introduceti datele doar in campul 'Numarul 1'");
 				}
-
 			}
 		
 			if (lParam == (LPARAM)ButtonDif)

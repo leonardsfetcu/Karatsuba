@@ -57,10 +57,7 @@
     <Image Include="KaratsubaMultiplier.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="icon1.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ico00001.ico">
+    <Image Include="..\..\..\..\..\Desktop\calc.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

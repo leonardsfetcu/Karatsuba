@@ -480,46 +480,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				}
 
 			}
-		/*	if (lParam == (LPARAM)ButtonEq)
-			{
-				
-				digits = DigitsNumber(buff1_int[0], buff2_int[0]);
-					GetWindowText(nr2, buff, 200);
-					buff2_int[0] = wcslen(buff);
-
-					for (i = 0; i < wcslen(buff); i++)
-						buff2_int[i + 1] = buff[i] - '0';
-					
-					switch (operation)
-					{
-					case 1: value = Sum(buff1_int, buff2_int);
-						break;
-					case 2: value = Diff(buff1_int, buff2_int);
-						break;
-					case 3: value = Multiplier(buff1_int, buff2_int, digits);
-						break;
-					default:
-						break;
-					}
-						
-						
-				
-						if (value != NULL)
-						{
-							value = Cleaner(value);
-
-							for (i = 1; i <= value[0]; i++)
-								buff[i - 1] = value[i] + '0';
-
-
-							buff[i - 1] = '\0';
-							SetWindowText(text_box, buff);
-						}
-						buff1_int=value;
-
-				
-					
-			}*/
+		
 			if (lParam == (LPARAM)ButtonDif)
 			{
 				SetWindowText(operationWindow, L"-");
@@ -547,6 +508,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 							buff2_int[i + 1] = buff[i] - '0';
 
 						SetWindowText(text_box, L"");
+
 						value =Diff(buff1_int, buff2_int);
 
 						if (value != NULL)
@@ -558,6 +520,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 
 							buff[i - 1] = '\0';
+
+						
 							SetWindowText(text_box, buff);
 						}
 						buff1_int = value;
